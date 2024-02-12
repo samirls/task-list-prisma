@@ -107,6 +107,7 @@ model Comment {
 
 model Task {
   id            String @id @default(auto()) @map("_id") @db.ObjectId
+  title         String
   content       String
   userCreatorId String
 

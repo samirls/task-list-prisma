@@ -20,15 +20,14 @@ import React, { useState } from "react";
 import { IoMdAddCircle } from "react-icons/io";
 import { createTask } from "@/app/actions/tasks";
 import { ChangeEvent, FormEvent } from "react";
-import { useMediaQuery } from '@chakra-ui/react'
+import { useMediaQuery } from "@chakra-ui/react";
 
 interface AddTaskModalProps {
   user_id: string | undefined | null;
 }
 
-function AddTaskModal({user_id}:AddTaskModalProps) {
-
-  const [isLargerThan800] = useMediaQuery('(min-width: 992px)')
+function AddTaskModal({ user_id }: AddTaskModalProps) {
+  const [isLargerThan800] = useMediaQuery("(min-width: 992px)");
   const initialRef = React.useRef(null);
   const finalRef = React.useRef(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -36,19 +35,16 @@ function AddTaskModal({user_id}:AddTaskModalProps) {
   const toast = useToast();
 
   const [task, setTask] = useState("");
+  const [title, setTitle] = useState("");
 
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setTask(event.target.value);
-  };
-
-  console.log(user_id)
+  console.log(user_id);
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
 
-    if (task === "") {
+    if (task === "" || title === '') {
       return toast({
-        title: "Task must have a description",
+        title: "Must fill all fields",
         position: "top",
         status: "error",
         duration: 5000,
@@ -57,7 +53,7 @@ function AddTaskModal({user_id}:AddTaskModalProps) {
     }
 
     setIsLoading(true);
-    await createTask(task!, user_id!);
+    await createTask(user_id!, title!, task!);
     setIsLoading(false);
     setTask("");
     toast({
@@ -70,6 +66,8 @@ function AddTaskModal({user_id}:AddTaskModalProps) {
     });
     onClose();
   };
+
+  console.log(title)
 
   return (
     <Box>
@@ -87,7 +85,7 @@ function AddTaskModal({user_id}:AddTaskModalProps) {
         isOpen={isOpen}
         onClose={onClose}
         isCentered
-        size={isLargerThan800 ? 'xl' : 'xs'}
+        size={isLargerThan800 ? "xl" : "xs"}
       >
         <ModalOverlay />
         <ModalContent>
@@ -95,11 +93,19 @@ function AddTaskModal({user_id}:AddTaskModalProps) {
           <ModalCloseButton />
           <ModalBody pb={6}>
             <FormControl>
-              <FormLabel>Description:</FormLabel>
+              <FormLabel>Title:</FormLabel>
               <Input
                 ref={initialRef}
-                placeholder="Need to buy some fruits for breakfast"
-                onChange={handleChange}
+                placeholder="Supermarket"
+                onChange={(e) => setTitle(e.target.value)}
+                value={title}
+              />
+            </FormControl>
+            <FormControl pt='20px'>
+              <FormLabel>Description:</FormLabel>
+              <Input
+                placeholder="Buy some fruits for breakfast"
+                onChange={(e) => setTask(e.target.value)}
                 value={task}
               />
             </FormControl>

@@ -10,6 +10,7 @@ import { Item } from "@radix-ui/react-select";
 interface TaskProps {
   task: {
     id: string;
+    title: string;
     content: string;
     userCreatorId: string;
     createdAt: Date;
@@ -60,6 +61,7 @@ function Task({ task, friends }: TaskProps) {
       mb="15px"
     >
       <Box>
+      <Box fontSize={{ base: "1.1rem", lg: "1.3rem" }} py='5px' fontWeight={700}>{task.title.toLocaleUpperCase()}</Box>
         <Box fontSize={{ base: "1rem", lg: "1.2rem" }}>{task.content}</Box>
         <Box fontSize={{ base: "0.7rem", lg: "1rem" }} color="gray.400">
           Created by user{" "}
@@ -90,7 +92,7 @@ function Task({ task, friends }: TaskProps) {
         flexDirection={{ base: "column", lg: "row" }}
       >
         <Button colorScheme="teal" onClick={onShareModalOpen} size="sm">
-          Share
+          Shares
         </Button>
         <ShareTaskModal
           isOpen={isShareModalOpen}
@@ -100,7 +102,7 @@ function Task({ task, friends }: TaskProps) {
           sharedUsers={sharedUsers}
         />
         <Button colorScheme="purple" onClick={onEditModalOpen} size="sm">
-          Edit
+          Content
         </Button>
         <EditTaskModal
           isOpen={isEditModalOpen}

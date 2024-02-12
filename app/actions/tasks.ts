@@ -1,5 +1,4 @@
 "use server";
-import { sql } from "@vercel/postgres";
 import { unstable_noStore as noStore } from "next/cache";
 import { revalidatePath } from "next/cache";
 import { PrismaClient } from "@prisma/client";
@@ -31,14 +30,15 @@ export async function fetchTasks(user_id: string) {
     return data;
   } catch (error) {
     console.error("Database Error:", error);
-    throw new Error("Failed to fetch comments.");
+    throw new Error("Failed to fetch tasks.");
   }
 }
 
-export async function createTask(task: string, user_id: string) {
+export async function createTask( user_id: string, title: string, task: string) {
   try {
     await prisma.task.create({
       data: {
+        title: title,
         content: task,
         userCreatorId: user_id,
         users: { connect: { id: user_id } },
