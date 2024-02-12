@@ -11,7 +11,7 @@ function Topnav() {
   const pathname = usePathname();
 
   return (
-    <div className="flex w-full justify-between items-center py-12 px-4 lg:px-20 shadow-md fixed top-0 h-32 bg-white z-10">
+    <div className="flex w-full justify-between items-center py-12 px-4 lg:px-20 shadow-md fixed top-0 h-32 bg-white z-30">
       <div className="text-2xl lg:text-4xl font-bold flex items-center gap-2">
         <FcTodoList />
         Task List App
