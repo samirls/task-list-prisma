@@ -101,7 +101,7 @@ function AddFriendModal({ userId }: AddFriendModalProps) {
           <ModalCloseButton />
           <ModalBody pb={6}>
             <FormControl>
-              <FormLabel>Id:</FormLabel>
+              <FormLabel>Inform your friend <Box as='span' fontWeight={700}>Email:</Box></FormLabel>
               <Input
                 ref={initialRef}
                 onChange={(e) => {

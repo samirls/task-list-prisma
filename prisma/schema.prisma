@@ -128,3 +128,4 @@ model Friends {
 }
 
 //when to use capital letters or plural on thos Entities?
+//camelCase to atributes and capital letters for entities. 

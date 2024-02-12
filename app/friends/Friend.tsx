@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, Button, Grid, useDisclosure } from "@chakra-ui/react";
+import { Box, Button, useDisclosure } from "@chakra-ui/react";
 import React from "react";
 import DeleteFriendModal from "./modals/DeleteFriendModal";
 
@@ -32,10 +32,7 @@ function Friend({ friend }: FriendProps) {
     >
       <Box>
         <Box fontSize={{ base: "1rem", lg: "1.2rem" }}>
-          {friend?.friend?.name?.toUpperCase()}
-        </Box>
-        <Box fontSize={{ base: "0.8rem", lg: "1rem" }}>
-          Id: {friend?.friend?.id}
+          <Box as='span' fontWeight={600}>{friend?.friend?.name?.toUpperCase()}</Box>
         </Box>
         <Box fontSize={{ base: "0.8rem", lg: "1rem" }}>
           Email: {friend?.friend?.email}

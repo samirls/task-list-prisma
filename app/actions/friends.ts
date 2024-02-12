@@ -33,22 +33,22 @@ export async function fetchFriends(user_id: string | undefined) {
   }
 }
 
-export async function addFriend(user_id: string, added_friend_id: string) {
+export async function addFriend(user_id: string, add_friend_email: string) {
   try {
-    const user = await prisma.user.findUnique({
+    const friend = await prisma.user.findUnique({
       where: {
-        id: added_friend_id,
+        email: add_friend_email,
       },
     });
 
-    if (!user) {
-      throw new Error("User not found");
+    if (!friend) {
+      throw new Error(`User with email ${add_friend_email} not found.`);
     }
 
     const existingFriend = await prisma.friends.findFirst({
       where: {
         userId: user_id,
-        friendId: added_friend_id,
+        friendId: friend.id,
       },
     });
 
@@ -59,10 +59,11 @@ export async function addFriend(user_id: string, added_friend_id: string) {
     await prisma.friends.create({
       data: {
         userId: user_id,
-        friendId: added_friend_id,
+        friendId: friend.id,
       },
     });
   } catch (error) {
+    console.error("Database Error:", error);
     throw error;
   }
   revalidatePath("/friends");
