@@ -37,14 +37,6 @@ async function Friends() {
       >
         Friends
       </Box>
-      <Box
-        fontSize="1.5rem"
-        fontWeight="400"
-        display="flex"
-        pl='20px'
-      >
-        Hello {allUserData?.name.toUpperCase()}, your Id is: {allUserData?.user_id}
-      </Box>
       <Box pl={{ base: "10px", lg: "100px" }} py="10px">
         <AddFriendModal userId={allUserData?.id}/>
       </Box>

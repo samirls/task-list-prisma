@@ -22,6 +22,7 @@ export async function fetchTasks(user_id: string) {
           select: {
             id: true,
             name: true,
+            email: true,
           },
         },
       },

@@ -20,6 +20,7 @@ export async function fetchFriends(user_id: string | undefined) {
           select: {
             id: true,
             name: true,
+            email: true,
           },
         },
       },

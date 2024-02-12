@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  Box,
   Button,
   FormControl,
   FormLabel,
@@ -20,6 +21,7 @@ import { deleteTask } from "@/app/actions/tasks";
 interface DeleteTaskModalProps {
   task: {
     id: string;
+    title: string;
     content: string;
     userCreatorId: string;
     createdAt: Date;
@@ -31,26 +33,25 @@ interface DeleteTaskModalProps {
   onClose: () => void;
 }
 
-function DeleteTaskModal({task, isOpen, onClose}:DeleteTaskModalProps) {
-  const [isLargerThan800] = useMediaQuery('(min-width: 992px)')
+function DeleteTaskModal({ task, isOpen, onClose }: DeleteTaskModalProps) {
+  const [isLargerThan800] = useMediaQuery("(min-width: 992px)");
   const initialRef = React.useRef(null);
   const finalRef = React.useRef(null);
   const [isLoading, setIsLoading] = useState(false);
   const toast = useToast();
 
   const handleDeleteTask = async () => {
-    setIsLoading(true)
+    setIsLoading(true);
     await deleteTask(task.id);
-    setIsLoading(false)
+    setIsLoading(false);
     toast({
-      title: 'Task Deleted!',
-      position: 'top',
-      status: 'success',
+      title: "Task Deleted!",
+      position: "top",
+      status: "success",
       duration: 4000,
       isClosable: true,
-    })
+    });
   };
-
 
   return (
     <>
@@ -60,7 +61,7 @@ function DeleteTaskModal({task, isOpen, onClose}:DeleteTaskModalProps) {
         isOpen={isOpen}
         onClose={onClose}
         isCentered
-        size={isLargerThan800 ? 'xl' : 'xs'}
+        size={isLargerThan800 ? "xl" : "xs"}
       >
         <ModalOverlay />
         <ModalContent>
@@ -68,12 +69,23 @@ function DeleteTaskModal({task, isOpen, onClose}:DeleteTaskModalProps) {
           <ModalCloseButton />
           <ModalBody pb={6}>
             <FormControl>
-              <FormLabel>{task.content}</FormLabel>
+              <FormLabel>
+                Title:{" "}
+                <Box as="span" fontWeight={700}>
+                  {task.title}
+                </Box>
+              </FormLabel>
             </FormControl>
           </ModalBody>
 
           <ModalFooter>
-            <Button colorScheme="red" mr={3} isLoading={isLoading} loadingText='Deleting' onClick={handleDeleteTask}>
+            <Button
+              colorScheme="red"
+              mr={3}
+              isLoading={isLoading}
+              loadingText="Deleting"
+              onClick={handleDeleteTask}
+            >
               Delete
             </Button>
             <Button onClick={onClose}>Cancel</Button>

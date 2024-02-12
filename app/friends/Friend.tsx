@@ -9,7 +9,7 @@ interface FriendProps {
     id: string;
     userId: string;
     friendId: string;
-    friend: { id: string | null; name: string | null };
+    friend: { id: string | null; name: string | null; email: string | null };
   };
 }
 
@@ -21,9 +21,9 @@ function Friend({ friend }: FriendProps) {
       display="flex"
       justifyContent="space-between"
       alignItems="center"
-      height="60px"
       mx={{ base: "10px", lg: "100px" }}
       px={{ base: "5px", lg: "15px" }}
+      py='10px'
       boxShadow="md"
       borderRadius="lg"
       border="1px"
@@ -36,6 +36,9 @@ function Friend({ friend }: FriendProps) {
         </Box>
         <Box fontSize={{ base: "0.8rem", lg: "1rem" }}>
           Id: {friend?.friend?.id}
+        </Box>
+        <Box fontSize={{ base: "0.8rem", lg: "1rem" }}>
+          Email: {friend?.friend?.email}
         </Box>
       </Box>
       <Box

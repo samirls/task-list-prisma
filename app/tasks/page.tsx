@@ -1,3 +1,5 @@
+'use server'
+
 import React from "react";
 import { fetchTasks } from "@/app/actions/tasks";
 import { fetchFriends } from "@/app/actions/friends";
@@ -22,10 +24,7 @@ async function Tasks() {
 
   const fetchedTasks = await fetchTasks(allUserData?.id || '');
 
-  ////////////////////////////////////////////////////////////////////////
-
   const friends = await fetchFriends(allUserData?.id);
-  console.log(friends)
 
 
   return (
@@ -44,7 +43,7 @@ async function Tasks() {
         display="flex"
         pl='20px'
       >
-        Hello {allUserData?.name?.toUpperCase()}, your Id is: {allUserData?.id}
+        Hello<Box as='span' pl='4px' fontWeight='700' color={allUserData?.color!}>{allUserData?.name?.toUpperCase()}!</Box>
       </Box>
       <Box pl={{ base: "10px", lg: "100px" }} py="10px">
         <AddTaskModal user_id={allUserData?.id}/>
