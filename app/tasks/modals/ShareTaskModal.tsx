@@ -35,7 +35,7 @@ interface ShareTaskModalProps {
   isOpen: boolean;
   onClose: () => void;
   friends: Friend[];
-  sharedUsers: { id: string | null; name: string | null };
+  sharedUsers: { id: string | null; name: string | null }[];
 }
 
 interface Friend {
@@ -43,6 +43,11 @@ interface Friend {
   userId: string;
   friendId: string;
   friend: { id: string | null; name: string | null };
+}
+
+interface ExpectedItem {
+  id: string | null;
+  name: string | null;
 }
 
 function ShareTaskModal({
@@ -66,7 +71,9 @@ function ShareTaskModal({
 
     if (
       selectedFriend &&
-      !selectedFriends.some((item) => item.id === event.target.value)
+      !selectedFriends.some(
+        (item: ExpectedItem) => item.id === event.target.value
+      )
     ) {
       setSelectedFriends([...selectedFriends, selectedFriend]);
     }
@@ -74,7 +81,7 @@ function ShareTaskModal({
 
   const removeSingleFriend = (id: string) => {
     const updatedFriends = selectedFriends.filter(
-      (item) => item.id !== id
+      (item: ExpectedItem) => item.id !== id
     );
     setSelectedFriends(updatedFriends);
   };
@@ -83,9 +90,9 @@ function ShareTaskModal({
     try {
       setIsLoading(true);
 
-      const selectedUserIds = selectedFriends.map((item) => item.id);
-
-      console.log(selectedUserIds)
+      const selectedUserIds = selectedFriends.map(
+        (item: ExpectedItem) => item.id
+      );
 
       await shareTask(task.id, selectedUserIds);
 
@@ -118,7 +125,6 @@ function ShareTaskModal({
       setSelectedFriends(sharedUsers);
     }
   }, [isOpen, sharedUsers]);
-
 
   return (
     <Modal
@@ -154,7 +160,7 @@ function ShareTaskModal({
                 ))}
               </Select>
               <Box>
-                {selectedFriends?.map((item, index) => (
+                {selectedFriends?.map((item: any, index: any) => (
                   <Box key={index} pt="10px">
                     <Tag
                       size="md"
