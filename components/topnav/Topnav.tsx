@@ -5,7 +5,8 @@ import { FcTodoList } from "react-icons/fc";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import SheetComponent from "./SheetComponent";
-
+import { signOutExecuted } from "@/app/actions/auth";
+import { paths } from "../utils/paths";
 
 function Topnav() {
   const pathname = usePathname();
@@ -18,18 +19,24 @@ function Topnav() {
       </div>
 
       <div className="gap-10 text-xl hidden lg:flex">
-        {(pathname === "/" ||
-          pathname === "/login" ||
-          pathname === "/register") && (
+        {(pathname === paths.home() ||
+          pathname === paths.login() ||
+          pathname === paths.register()) && (
           <>
-            <Link href="/" className="text-blue-400 hover:text-blue-600">
+            <Link href={paths.home()} className="text-blue-400 hover:text-blue-600">
               Home
             </Link>
-            <Link href="/login" className="text-blue-400 hover:text-blue-600">
+            <Link
+              href={paths.community()}
+              className="text-blue-400 hover:text-blue-600"
+            >
+              Community
+            </Link>
+            <Link href={paths.login()} className="text-blue-400 hover:text-blue-600">
               Login
             </Link>
             <Link
-              href="/register"
+              href={paths.register()}
               className="text-blue-400 hover:text-blue-600"
             >
               Register
@@ -40,20 +47,24 @@ function Topnav() {
           pathname === "/friends" ||
           pathname === "/logout") && (
           <>
-            <Link href="/tasks" className="text-blue-400 hover:text-blue-600">
-              Tasks
-            </Link>
             <Link
-              href="/friends"
+              href={paths.community()}
               className="text-blue-400 hover:text-blue-600"
             >
+              Community
+            </Link>
+            <Link href={paths.tasks()} className="text-blue-400 hover:text-blue-600">
+              Tasks
+            </Link>
+            <Link href={paths.friends()} className="text-blue-400 hover:text-blue-600">
               Friends
             </Link>
             <Link
-              href="/logout"
+              href={""}
+              onClick={() => signOutExecuted()}
               className="text-blue-400 hover:text-blue-600"
             >
-              Logout
+              Sign Out
             </Link>
           </>
         )}

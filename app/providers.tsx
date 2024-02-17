@@ -2,13 +2,14 @@
 
 import { NextUIProvider } from "@nextui-org/react";
 import { ChakraProvider } from "@chakra-ui/react";
+import { SessionProvider } from "next-auth/react";
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
-    <ChakraProvider>
-      <NextUIProvider>
-        {children}
-      </NextUIProvider>
-    </ChakraProvider>
+    <SessionProvider>
+      <ChakraProvider>
+        <NextUIProvider>{children}</NextUIProvider>
+      </ChakraProvider>
+    </SessionProvider>
   );
 }

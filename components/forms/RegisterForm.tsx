@@ -6,7 +6,7 @@ import { Input } from "@nextui-org/react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { useFormState } from "react-dom";
-import { register } from "@/app/actions/auth";
+import { register } from "@/auth";
 import { Select, SelectItem } from "@nextui-org/react";
 
 export default function RegisterForm() {

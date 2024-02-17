@@ -54,6 +54,10 @@ export const { auth, signIn, signOut } = NextAuth({
   ],
 });
 
+export async function signOutExecuted() {
+  return signOut();
+}
+
 export async function authenticate({
   email,
   password,

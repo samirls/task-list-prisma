@@ -56,6 +56,10 @@ export async function addFriend(user_id: string, add_friend_email: string) {
       throw new Error("User already exists in your list");
     }
 
+    if (friend.id === user_id) {
+      throw new Error("Cannot add yourself");
+    }
+
     await prisma.friends.create({
       data: {
         userId: user_id,

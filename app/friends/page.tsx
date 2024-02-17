@@ -40,7 +40,7 @@ async function Friends() {
       <Box pl={{ base: "10px", lg: "100px" }} py="10px">
         <AddFriendModal userId={allUserData?.id}/>
       </Box>
-      <Box>
+      <Box display='flex' p="20px">
         {fetchedFriends.map((friend, index) => (
           <Friend key={index} friend={friend} />
         ))}

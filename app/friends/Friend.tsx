@@ -18,10 +18,7 @@ function Friend({ friend }: FriendProps) {
 
   return (
     <Box
-      display="flex"
-      justifyContent="space-between"
-      alignItems="center"
-      mx={{ base: "10px", lg: "100px" }}
+      mx={{ base: "5px", lg: "20px" }}
       px={{ base: "5px", lg: "15px" }}
       py='10px'
       boxShadow="md"
@@ -31,7 +28,7 @@ function Friend({ friend }: FriendProps) {
       mb="15px"
     >
       <Box>
-        <Box fontSize={{ base: "1rem", lg: "1.2rem" }}>
+        <Box fontSize={{ base: "1rem", lg: "1.2rem" }} display='flex' justifyContent='center'>
           <Box as='span' fontWeight={600}>{friend?.friend?.name?.toUpperCase()}</Box>
         </Box>
         <Box fontSize={{ base: "0.8rem", lg: "1rem" }}>
@@ -42,6 +39,8 @@ function Friend({ friend }: FriendProps) {
         display="flex"
         gap={{ base: 1, lg: 6 }}
         fontSize={{ base: "1rem", lg: "1.2rem" }}
+        justifyContent='center'
+        pt='15px'
       >
         <Button colorScheme="red" onClick={onOpen} size="sm">
           Delete
